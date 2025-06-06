@@ -74,16 +74,13 @@
 </head>
 <body>
 <script>
-  function playAudio(audioFile) {
+  function playAudio(audioFile, event) {
+    event.stopPropagation(); // Prevents the card from flipping
     var audio = new Audio(audioFile);
     audio.play();
   }
-
-  function flipCard(card) {
-    const inner = card.querySelector('.card-inner');
-    inner.classList.toggle('flip');
-  }
 </script>
+
 
 <!-- Flashcards -->
 <script>
