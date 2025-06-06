@@ -6,7 +6,7 @@
   <title>Polish Numbers Flashcards</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -21,6 +21,9 @@
       height: 300px;
       margin: 10px;
       perspective: 1000px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
     }
     .card-inner {
       position: relative;
@@ -29,9 +32,6 @@
       text-align: center;
       transition: transform 0.6s;
       transform-style: preserve-3d;
-    }
-    .card:hover .card-inner {
-      transform: rotateY(180deg);
     }
     .card-front, .card-back {
       position: absolute;
@@ -48,12 +48,14 @@
       background-color: #007bff;
       color: white;
       font-size: 2em;
+      border-radius: 10px;
     }
     .card-back {
       background-color: #fff;
       color: #333;
       transform: rotateY(180deg);
       flex-direction: column;
+      border-radius: 10px;
     }
     .audio-button {
       margin-top: 20px;
@@ -63,6 +65,10 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 1em;
+    }
+    .card-inner.flip {
+      transform: rotateY(180deg);
     }
   </style>
 </head>
@@ -71,6 +77,11 @@
   function playAudio(audioFile) {
     var audio = new Audio(audioFile);
     audio.play();
+  }
+
+  function flipCard(card) {
+    const inner = card.querySelector('.card-inner');
+    inner.classList.toggle('flip');
   }
 </script>
 
@@ -101,7 +112,7 @@
 
   flashcards.forEach((card, index) => {
     document.write(`
-      <div class="card">
+      <div class="card" ontouchstart="flipCard(this)">
         <div class="card-inner">
           <div class="card-front">${index + 1}</div>
           <div class="card-back">
@@ -116,3 +127,4 @@
 </script>
 </body>
 </html>
+
