@@ -111,7 +111,7 @@
 
   flashcards.forEach((card, index) => {
     document.write(`
-      <div class="card" ontouchstart="flipCard(this)">
+      <div class="card" ontouchstart="flipCard(this)" onclick="flipCard(this)">
         <div class="card-inner">
           <div class="card-front">${index + 1}</div>
           <div class="card-back">
