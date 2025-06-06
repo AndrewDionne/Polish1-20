@@ -22,8 +22,6 @@
       margin: 10px;
       perspective: 1000px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
     }
     .card-inner {
       position: relative;
@@ -75,12 +73,16 @@
 <body>
 <script>
   function playAudio(audioFile, event) {
-    event.stopPropagation(); // Prevents the card from flipping
+    event.stopPropagation(); // Prevents card flip
     var audio = new Audio(audioFile);
     audio.play();
   }
-</script>
 
+  function flipCard(card) {
+    const inner = card.querySelector('.card-inner');
+    inner.classList.toggle('flip');
+  }
+</script>
 
 <!-- Flashcards -->
 <script>
@@ -115,7 +117,7 @@
           <div class="card-back">
             <div>${card[0]}</div>
             <div>(${card[1]})</div>
-            <button class="audio-button" onclick="playAudio('${card[2]}')">Play Audio</button>
+            <button class="audio-button" onclick="playAudio('${card[2]}', event)">Play Audio</button>
           </div>
         </div>
       </div>
